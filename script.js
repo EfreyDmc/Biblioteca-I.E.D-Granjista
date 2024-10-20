@@ -2,7 +2,7 @@
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 
-// Almacenar los usuarios registrados en localStorage o en un array temporal
+// Almacena los usuarios registrados
 let users = JSON.parse(localStorage.getItem('users')) || [];
 
 // Manejar el registro
@@ -23,17 +23,13 @@ if (registerForm) {
             return;
         }
 
-        // Verificar si el apodo ya existe
-        if (users.some(user => user.apodo === apodo)) {
-            errorMessage.textContent = 'El apodo ya está en uso';
-            return;
-        }
-
-        // Guardar el nuevo usuario
+        // Guardar el nuevo usuario en localStorage
         users.push({ nombre, apellido, apodo, password });
         localStorage.setItem('users', JSON.stringify(users));
         alert('Usuario registrado exitosamente');
-        registerForm.reset();
+
+        // Redirigir al inicio de sesión
+        window.location.href = "login.html";  // Cambia "login.html" por tu archivo de inicio de sesión
     });
 }
 
@@ -55,7 +51,7 @@ if (loginForm) {
             errorMessage.textContent = 'Contraseña incorrecta';
         } else {
             alert('Inicio de sesión exitoso');
-            window.location.href = 'welcome.html';
+            window.location.href = 'welcome.html';  // Cambia "welcome.html" si es necesario
         }
     });
 }
